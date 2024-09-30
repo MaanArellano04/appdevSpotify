@@ -1,0 +1,215 @@
+<style>
+    
+    body {
+        background-color: #121212;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #181818;
+        border-radius: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+
+  
+    h1 {
+        color: white;
+        font-size: 2.5rem;
+        margin-bottom: 0;
+    }
+
+    h2 {
+        color: #1DB954; 
+        font-size: 2rem;
+        margin: 10px 0;
+    }
+
+    h3 {
+        color: #b3b3b3;
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    /* Song Image */
+    .song-container img {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .song-container img:hover {
+        transform: scale(1.05);
+    }
+
+    
+    audio {
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 10px;
+        background-color: #1db954;
+    }
+
+    
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        margin: 15px 0;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    textarea {
+        height: 120px;
+        resize: none;
+    }
+
+
+    .form-buttons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .form-buttons button {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 50px;
+        background: #1DB954;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex: 1;
+    }
+
+    .form-buttons button:hover {
+        background: #1ed760;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+   
+    .delete-button {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 50px;
+        background: #e22134; 
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+    }
+
+    .delete-button:hover {
+        background: #ff3b4a;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    
+    .back-button {
+        margin-top: 20px;
+        padding: 12px 30px;
+        border-radius: 50px;
+        background: #535353;
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: block;
+        width: 100%;
+    }
+
+    .back-button:hover {
+        background: #404040;
+        transform: translateY(-3px);
+    }
+
+    
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 26px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        .form-buttons button {
+            font-size: 14px;
+        }
+    }
+</style>
+
+<body>
+    <div class="main-container">
+        <h1>Update Song</h1>
+        <h2><%= song.title %></h2>
+        <h3>by <%= song.artist %></h3>
+
+        <% if (song.cover) { %>
+            <img class="center" src="/<%= song.cover %>" alt="Cover Image">
+        <% } %>
+
+        <audio controls>
+            <source src="/<%= song.path %>" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+
+        <form action="/updatemusic/<%= song.id %>" method="POST">
+            <input type="text" name="song_name" value="<%= song.song_name %>" placeholder="Enter Song Name" required>
+            <input type="text" name="author" value="<%= song.author %>" placeholder="Enter Author Name" required>
+            <textarea name="lyrics" placeholder="Write the lyrics here..." required><%= song.lyrics %></textarea>
+            <div class="form-buttons">
+                <button type="submit">Update Song</button>
+            </div>
+        </form>
+
+        <br>
+
+        <form action="/delete/<%= song.id %>" method="POST" style="display: inline;">
+            <button type="submit" class="delete-button">Delete Song</button>
+        </form>
+
+        <button class="back-button" onclick="window.location.href='/playmusic/<%= song.id %>'">Back to Home</button>
+    </div>
+</body>

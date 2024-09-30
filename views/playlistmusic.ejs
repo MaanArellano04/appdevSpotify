@@ -1,0 +1,36 @@
+<%- include('partials/sidebar') %>
+<body>
+    <div class="main-container">
+      
+
+      <div class="spotify-playlists">
+        <h2>My songs</h2>
+        <div class="list">
+          <% if (musicList.length > 0) { %>
+              <% musicList.forEach((music) => { %>
+                  <div class="item"> 
+                      <ul>
+                          <li class="music-item">
+                              <a href="/playmusic/<%= music.id %>">
+                                  <% if (music.cover) { %>
+                                      <img src="/<%= music.cover %>" alt="Cover Image">
+                                  <% } %>
+                                  <h4><%= music.title %> <br></h4>
+                                  <p><%= music.artist %></p>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              <% }) %>
+          <% } else { %>
+              <p>No music available. Please add some!</p>
+          <% } %>
+      </div>
+      </div>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/23cecef777.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>

@@ -1,0 +1,87 @@
+<%- include('partials/sidebar') %>
+<head>
+    <style>
+      textarea {
+            width: 90%;
+            height: 90%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.audio-container {
+    display: flex;            
+    justify-content: center;   
+    align-items: center;       
+    height: 10%;              
+}
+.row-container{
+    display: flex;             
+    justify-content: center;   
+    align-items: center;       
+    height: 10%; 
+}
+.row-container button{
+    
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 0px;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-left: 20px;
+    
+}
+    </style>
+</head>
+
+<body>
+    
+    <div class="container">
+        
+
+        
+        <div class="main-container">
+            
+            <h1 style="text-align: center; color: white;"><%= song.title %></h1>
+            <h2 style="text-align: center; color: white;">by <%= song.artist %></h2>
+            <% if (song.cover) { %>
+                <img src="/<%= song.cover %>" alt="Cover Image" class="center" style="width: 500px; height: 500px;">
+            <% } %>
+
+           
+            <div class="audio-container">
+                <audio id="audioPlayer" controls>
+                    <source src="/<%= song.path %>" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+        
+            <div class="row-container">
+                <button class="song-action" onclick="window.location.href='/updatemusic/<%= song.id %>'">Update Song</button>
+
+                <form action="/add-to-playlist" method="POST">
+                    <input type="hidden" name="song_id" value="<%= song.id %>">
+                    <button type="submit">Add to Playlist</button>
+                </form>
+            </div>
+
+
+            <h3 style="color: white; text-align: center;">Lyrics:</h3>
+            <textarea style="text-align: center;" class="center" name="lyrics" placeholder="Write the lyrics here..." readonly required><%= song.lyrics %></textarea>
+
+        </div>
+    </div>
+</body>

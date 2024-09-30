@@ -1,0 +1,141 @@
+<%- include('partials/sidebar')%>
+<head></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Music</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #1DB954; 
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #b3b3b3;
+            margin-top: 10px;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            margin: 10px 0;
+            background: #333;
+            color: #fff;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #b3b3b3;
+        }
+
+        textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .form-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-buttons button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            background: #1DB954; 
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 48%;
+            transition: background 0.3s ease;
+        }
+
+        .form-buttons button:hover {
+            background: #1ed760;
+        }
+
+        .form-buttons button[type="button"] {
+            background: #333; /* Cancel button */
+            color: white;
+        }
+
+        .form-buttons button[type="button"]:hover {
+            background: #555;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .form-buttons button {
+                font-size: 14px;
+            }
+        }
+
+        .main-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <h1>Upload Song</h1>
+            <form action="/addsongs" method="POST" enctype="multipart/form-data">
+                <label>Song Name:</label>
+                <input type="text" name="song_name" placeholder="Enter Song Name" required>
+
+                <label>Author:</label>
+                <input type="text" name="author" placeholder="Enter Author Name" required>
+
+                <label>Music File:</label>
+                <input type="file" name="music" accept="audio/*" required>
+
+                <label>Cover Image:</label>
+                <input type="file" name="picture" accept="image/*">
+
+                <label>Lyrics:</label>
+                <textarea name="lyrics" placeholder="Write the lyrics here..."></textarea>
+
+                <div class="form-buttons">
+                    <button type="button" onclick="window.location.href='/'">Cancel</button>
+                    <button type="submit">Upload Music</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
